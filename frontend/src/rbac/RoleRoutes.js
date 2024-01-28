@@ -8,8 +8,7 @@ const RoleRoutes = () => {
   return (
     <div className={styles.routePageContainer}>
       <Routes>
-        {ROLE_ROUTES['admin'].map((route) => {
-          //change the static admin role to user role
+        {ROLE_ROUTES['user'].map((route) => {
           return <Route key={route.name} path={route.link} exact element={route.component} />;
         })}
       </Routes>
