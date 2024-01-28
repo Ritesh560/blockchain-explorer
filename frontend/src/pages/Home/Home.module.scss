@@ -1,21 +1,111 @@
-.home {
-  width: 100%;
-  height: 100%;
-  padding: 0 100px;
+// Navbar styles
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007bff;
+  padding: 20px;
+  color: white;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navLinks {
+  list-style-type: none;
+  display: flex;
+}
+
+.navLinks li {
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.navLinks li:hover {
+  text-decoration: underline;
+}
+
+// Main content styles
+.container {
+  margin: 20px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.profileInfo {
+  flex: 1;
+}
+
+.name {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.email {
+  color: #666;
+}
+
+.walletAddress {
+  color: #666;
+}
+
+.balance {
+  text-align: right;
+}
+
+.balanceLabel {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.balanceAmount {
+  font-size: 24px;
+}
+
+.transactionsHeading {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.transactionList {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  ul {
-    display: grid;
-    grid-template-columns: 6fr 6fr;
-    li {
-      font-weight: 500;
-      display: grid;
-      grid-template-columns: 3fr 6fr;
-      align-content: center;
-      gap: 40px;
-      margin: 10px;
-    }
-  }
+}
+
+.transaction {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.transactionType {
+  font-weight: bold;
+}
+
+.viewTransactionsButton {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.viewTransactionsButton:hover {
+  background-color: #0056b3;
 }

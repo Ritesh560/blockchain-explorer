@@ -11,7 +11,7 @@ import { Eye, EyeOff } from '../../icons';
 const Signup = () => {
   // const { signup, signing } = useSignup()
   const signing = false;
-  const [input, setInput] = useState({ name: '', email: '', password: '' });
+  const [input, setInput] = useState({ name: '', email: '', password: '', walletAddress: '' });
   const [showPassword, setShowPassword] = useState(false);
 
   const { addError } = useContext(MessageContext);
@@ -69,6 +69,19 @@ const Signup = () => {
               onChange={(e) => setInput({ ...input, email: e.target.value })}
               name="email"
               placeholder="Email"
+            />
+          </div>
+        </div>
+        <div className={styles.inputBox}>
+          <label>Wallet Address</label>
+          <div>
+            <input
+              height="53px"
+              type="text"
+              value={input.email}
+              onChange={(e) => setInput({ ...input, walletAddress: e.target.value })}
+              name="wallet_address"
+              placeholder="Enter your blockchain address"
             />
           </div>
         </div>
