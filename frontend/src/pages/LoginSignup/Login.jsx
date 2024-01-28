@@ -1,13 +1,12 @@
 import React, { useContext, useState } from 'react';
 import styles from './LoginSignup.module.scss';
 import { Link } from 'react-router-dom';
-// import { useLogin } from "../../lib/data-access/src"
 import { MessageContext } from '../../lib/contexts/MessageContext';
 import { Eye, EyeOff } from '../../icons';
+import useLogin from '../../lib/data-access/src/lib/useLogin';
 
 const Login = () => {
-  // const { login, logging } = useLogin()
-  const logging = false;
+  const { login, logging } = useLogin();
   const [input, setInput] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
 
@@ -26,15 +25,15 @@ const Login = () => {
       return;
     }
 
-    // login(input, {
-    //   onError: (err) => {
-    //     console.log(err)
-    //     addError("Invalid Credentials")
-    //   },
-    //   onSuccess: (user) => {
-    //     saveUser(user)
-    //   },
-    // })
+    login(input, {
+      onError: (err) => {
+        console.log(err);
+        addError('Invalid Credentials');
+      },
+      onSuccess: (user) => {
+        saveUser(user);
+      }
+    });
   };
 
   return (

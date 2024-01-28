@@ -1,21 +1,27 @@
-import { AuthorizedApi } from "./api"
-import { useMutation } from "react-query"
+import { AuthorizedApi } from './api';
+import { useQuery } from 'react-query';
+
+const QUERY_KEY = {
+  userInfo: 'user_info'
+};
 
 const useUser = () => {
   const fetchUserApi = async () => {
-    return AuthorizedApi.get("/api/v1/auth")
+    return AuthorizedApi.get('/api/auth')
       .then((res) => res.data)
       .catch((err) => {
-        throw err
-      })
-  }
+        throw err;
+      });
+  };
 
-  const { mutate: fetchUser, isLoading: fetchingUser } = useMutation(fetchUserApi)
+  const { data: userInfo, isLoading: fetchingUser } = useQuery([QUERY_KEY.userInfo], fetchUserApi, {
+    enabled: true
+  });
 
   return {
-    fetchUser,
-    fetchingUser,
-  }
-}
+    userInfo,
+    fetchingUser
+  };
+};
 
-export default useUser
+export default useUser;

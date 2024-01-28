@@ -1,17 +1,14 @@
 import React, { useContext, useState } from 'react';
 import styles from './LoginSignup.module.scss';
 
-// import { wordpic } from "../../assets"
-
 import { Link } from 'react-router-dom';
 import { MessageContext } from '../../lib/contexts/MessageContext';
-// import { useSignup } from "../../lib/data-access/src"
 import { Eye, EyeOff } from '../../icons';
+import { useSignup } from '../../lib/data-access/src';
 
 const Signup = () => {
-  // const { signup, signing } = useSignup()
-  const signing = false;
-  const [input, setInput] = useState({ name: '', email: '', password: '', walletAddress: '' });
+  const { signup, signing } = useSignup();
+  const [input, setInput] = useState({ name: '', email: '', password: '', wallet_address: '' });
   const [showPassword, setShowPassword] = useState(false);
 
   const { addError } = useContext(MessageContext);
@@ -25,20 +22,25 @@ const Signup = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (input.name === '' || input.email === '' || input.password === '') {
+    if (
+      input.name === '' ||
+      input.email === '' ||
+      input.password === '' ||
+      input.walletAddress === ''
+    ) {
       addError('All fields are required');
       return;
     }
 
-    // signup(input, {
-    //   onError: (err) => {
-    //     console.log(err)
-    //     addError(err.response.data.errors[0].msg)
-    //   },
-    //   onSuccess: (user) => {
-    //     saveUser(user)
-    //   },
-    // })
+    signup(input, {
+      onError: (err) => {
+        console.log(err);
+        addError(err.response.data.errors[0].msg);
+      },
+      onSuccess: (user) => {
+        saveUser(user);
+      }
+    });
   };
 
   return (
@@ -78,8 +80,8 @@ const Signup = () => {
             <input
               height="53px"
               type="text"
-              value={input.email}
-              onChange={(e) => setInput({ ...input, walletAddress: e.target.value })}
+              value={input.wallet_address}
+              onChange={(e) => setInput({ ...input, wallet_address: e.target.value })}
               name="wallet_address"
               placeholder="Enter your blockchain address"
             />

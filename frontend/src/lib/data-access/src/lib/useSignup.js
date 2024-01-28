@@ -1,21 +1,21 @@
-import { PublicApi } from "./api"
-import { useMutation } from "react-query"
+import { PublicApi } from './api';
+import { useMutation } from 'react-query';
 
 const useSignup = () => {
   const signupApi = async (data) => {
-    return PublicApi.post("/api/v1/user", data)
+    return PublicApi.post('/api/users', data)
       .then((res) => res.data)
       .catch((err) => {
-        throw err
-      })
-  }
+        throw err;
+      });
+  };
 
-  const { mutate: signup, isLoading: signing } = useMutation(signupApi)
+  const { mutate: signup, isLoading: signing } = useMutation(signupApi);
 
   return {
     signup,
-    signing,
-  }
-}
+    signing
+  };
+};
 
-export default useSignup
+export default useSignup;

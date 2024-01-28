@@ -1,8 +1,15 @@
 import React from 'react';
 import styles from './Home.module.scss';
 import ProfilePicture from '../../components/ProfilePicture/ProfilePicture';
+import { useUser } from '../../lib/data-access/src';
+import useWallet from '../../lib/data-access/src/lib/useWallet';
 
 const Home = () => {
+  const { userInfo } = useUser();
+  const { walletData, fetchingWalletData } = useWallet({ walletAddress: userInfo?.wallet_address });
+
+  console.log('walletData', walletData);
+
   const userData = {
     name: 'John Doe',
     walletAddress: '0x1234567890123456789012345678901234567890',
@@ -19,7 +26,7 @@ const Home = () => {
     <div>
       {/* Navbar */}
       <nav className={styles.navbar}>
-        <div className={styles.logo}>Your Logo</div>
+        <div className={styles.logo}>BlockChain Explorer</div>
         <ul className={styles.navLinks}>
           <li>Home</li>
           <li>Notifications</li>
@@ -32,9 +39,9 @@ const Home = () => {
         <div className={styles.profile}>
           <ProfilePicture className={styles.avatar} alt="Avatar" />
           <div className={styles.profileInfo}>
-            <h1 className={styles.name}>{userData.name}</h1>
-            <p className={styles.email}>{userData.email}</p>
-            <p className={styles.walletAddress}>Wallet Address: {userData.walletAddress}</p>
+            <h1 className={styles.name}>{userInfo?.name}</h1>
+            <p className={styles.email}>{userInfo?.email}</p>
+            <p className={styles.walletAddress}>Wallet Address: {userInfo?.wallet_address}</p>
           </div>
           <div className={styles.balance}>
             <p className={styles.balanceLabel}>Balance</p>
