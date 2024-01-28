@@ -1,14 +1,17 @@
 import React, { useContext, useState } from 'react';
-import styles from './Login.module.scss';
+import styles from './LoginSignup.module.scss';
+
+// import { wordpic } from "../../assets"
+
 import { Link } from 'react-router-dom';
-// import { useLogin } from "../../lib/data-access/src"
 import { MessageContext } from '../../lib/contexts/MessageContext';
+// import { useSignup } from "../../lib/data-access/src"
 import { Eye, EyeOff } from '../../icons';
 
-const Login = () => {
-  // const { login, logging } = useLogin()
-  const logging = false;
-  const [input, setInput] = useState({ email: '', password: '' });
+const Signup = () => {
+  // const { signup, signing } = useSignup()
+  const signing = false;
+  const [input, setInput] = useState({ name: '', email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
 
   const { addError } = useContext(MessageContext);
@@ -21,15 +24,16 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (input.email === '' || input.password === '') {
+
+    if (input.name === '' || input.email === '' || input.password === '') {
       addError('All fields are required');
       return;
     }
 
-    // login(input, {
+    // signup(input, {
     //   onError: (err) => {
     //     console.log(err)
-    //     addError("Invalid Credentials")
+    //     addError(err.response.data.errors[0].msg)
     //   },
     //   onSuccess: (user) => {
     //     saveUser(user)
@@ -38,15 +42,23 @@ const Login = () => {
   };
 
   return (
-    <div onKeyDown={(e) => e.key === 'Enter' && onSubmit(e)} className={styles.loginContainer}>
+    <div onKeyDown={(e) => e.key === 'Enter' && onSubmit(e)} className={styles.pageContainer}>
       <div className={styles.container}>
-        <div className={styles.logo}>
-          {/* <img src={wordpic} alt="" /> */}
+        <div className={styles.logo}>BlockChain Explorer</div>
+        <div className={styles.header_text}>Sign up</div>
+        <div className={styles.inputBox}>
+          <label>Name</label>
           <div>
-            <span>WordPic</span>
+            <input
+              height="53px"
+              type="text"
+              value={input.name}
+              onChange={(e) => setInput({ ...input, name: e.target.value })}
+              name="name"
+              placeholder="Name"
+            />
           </div>
         </div>
-        <div className={styles.header_text}>Sign in</div>
         <div className={styles.inputBox}>
           <label>Email</label>
           <div>
@@ -84,16 +96,16 @@ const Login = () => {
         </div>
         <button
           onClick={(e) => {
-            !logging && onSubmit(e);
+            !signing && onSubmit(e);
           }}>
-          {logging ? 'loading...' : 'Sign in'}
+          {signing ? 'loading...' : 'Sign up'}
         </button>
-        <Link to="/signup">
-          <button className={styles.signup}>Sign up</button>
+        <Link to="/login">
+          <button className={styles.login}>Login</button>
         </Link>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Signup;

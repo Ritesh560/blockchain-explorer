@@ -1,6 +1,6 @@
 import Home from '../../pages/Home/Home';
-import Login from '../../pages/Login/Login';
-import Signup from '../../pages/Signup/Signup';
+import Login from '../../pages/LoginSignup/Login';
+import Signup from '../../pages/LoginSignup/Signup';
 
 const USER_ROUTES = [
   {

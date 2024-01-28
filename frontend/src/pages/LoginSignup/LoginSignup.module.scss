@@ -1,6 +1,6 @@
-@import "../../lib/themes/styles/variables";
+@import '../../lib/themes/styles/variables';
 
-.loginContainer {
+.pageContainer {
   background: $bodyBackground !important;
   width: 100vw;
   .container {
@@ -19,25 +19,14 @@
     flex-direction: column;
     gap: 20px;
     .logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      img {
-        width: 50px;
+      text-align: center;
+      color: $mainPurple;
+      &:first-child {
+        font-size: 1.5rem;
+        font-weight: 700;
       }
-      > div {
-        span {
-          display: block;
-          color: $black;
-          &:first-child {
-            font-size: 1.1rem;
-            font-weight: 700;
-          }
-          &:last-child {
-            font-size: 0.9rem;
-          }
-        }
+      &:last-child {
+        font-size: 0.9rem;
       }
     }
     .header_text {
@@ -50,22 +39,24 @@
       font-weight: 500;
       text-align: center;
     }
-    & > button {
-      height: 50px;
-      border-radius: 15px;
-      box-shadow: 1px 8px 24px rgb(125 142 231 / 40%);
-      background-color: #6469ff;
-      color: white;
-      margin-top: 2rem;
-    }
 
-    .login {
+    button {
       height: 50px;
+      width: 100%;
       border-radius: 15px;
       box-shadow: 1px 8px 24px rgb(125 142 231 / 40%);
-      background-color: #6469ff;
+      background-color: $mainPurple;
       color: white;
-      width: 100%;
+      border: none;
+      cursor: pointer;
+      margin-top: 2rem;
+
+      &:hover {
+        background-color: #2930fd;
+      }
+    }
+    .signup,
+    .login {
       margin-top: 0;
     }
 
