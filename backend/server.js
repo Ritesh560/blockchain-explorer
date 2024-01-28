@@ -1,16 +1,18 @@
 let express = require("express")
+const cors = require("cors")
 let connectDB = require("./config/db")
-require("./middleware/test_blockchain")
 
 let app = express()
 
 //connect Database
-// connectDB()
+connectDB()
+
+app.use(cors())
 
 //Init Middleware
 app.use(express.json({ extended: false }))
 
-app.get("/", (req, res) => res.send("API Running"))
+app.get("/", (req, res) => res.send("Server is up and running."))
 
 app.use("/api/users", require("./routes/api/users"))
 app.use("/api/auth", require("./routes/api/auth"))

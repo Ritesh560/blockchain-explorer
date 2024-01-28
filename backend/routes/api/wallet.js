@@ -1,6 +1,6 @@
 const express = require("express")
 const auth = require("../../middleware/auth")
-const { getWalletTransections } = require("../../middleware/test_blockchain")
+const { getWalletTransections, getWalletBalance } = require("../../controllers/blockchainController")
 const router = express.Router()
 
 //@route GET api/users
@@ -8,6 +8,7 @@ const router = express.Router()
 //@access Public
 router.get("/:address", auth, (req, res) => {
   const wallet_address = req.params.address
+  console.log(wallet_address)
 
   const balance = getWalletBalance(wallet_address)
   const transections = getWalletTransections(wallet_address)
