@@ -1,11 +1,11 @@
-const express = require("express");
-const router = express.Router();
-const auth = require("../../middleware/auth");
+const express = require("express")
+const router = express.Router()
+const auth = require("../../middleware/auth")
 const jwt = require("jsonwebtoken")
-const config = require("config")
 const { check, validationResult } = require("express-validator")
-const User = require("../../models/User");
+const User = require("../../models/User")
 const bcrypt = require("bcryptjs")
+const { JWT_SECRET } = require("../../enviournments")
 
 //@route GET api/auth
 // @desc Test route
@@ -13,20 +13,19 @@ const bcrypt = require("bcryptjs")
 
 router.get("/", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
-    res.json(user);
+    const user = await User.findById(req.user.id).select("-password")
+    res.json(user)
   } catch (err) {
-    console.log(err);
-    res.status(500).send("Server Error");
+    console.log(err)
+    res.status(500).send("Server Error")
   }
-});
-
+})
 
 //@route GET api/auth
 // @desc Authenticate User and get token
 //@access Public
 
-router.post("/",[check("email", "Please include a valid email").isEmail(), check("password", "Please enter a password is required").exists()], async (req, res) => {
+router.post("/", [check("email", "Please include a valid email").isEmail(), check("password", "Please enter a password is required").exists()], async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() })
@@ -42,9 +41,9 @@ router.post("/",[check("email", "Please include a valid email").isEmail(), check
       return res.status(400).json({ errors: [{ msg: "Invalid credentials" }] })
     }
 
-    const isMatch = await bcrypt.compare(password,user.password)
+    const isMatch = await bcrypt.compare(password, user.password)
 
-    if(!isMatch){
+    if (!isMatch) {
       return res.status(400).json({ errors: [{ msg: "Invalid credentials" }] })
     }
 
@@ -55,7 +54,7 @@ router.post("/",[check("email", "Please include a valid email").isEmail(), check
       },
     }
 
-    jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 360000 }, (err, token) => {
+    jwt.sign(payload, JWT_SECRET, { expiresIn: 360000 }, (err, token) => {
       if (err) {
         throw err
       } else {
@@ -68,5 +67,4 @@ router.post("/",[check("email", "Please include a valid email").isEmail(), check
   }
 })
 
-
-module.exports = router;
+module.exports = router

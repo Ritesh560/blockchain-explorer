@@ -11,16 +11,18 @@
   "author": "Ritesh Kumar",
   "license": "MIT",
   "dependencies": {
+    "@moralisweb3/common-evm-utils": "^2.24.1",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.6",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
     "express": "^4.17.1",
     "express-validator": "^6.11.1",
     "gravatar": "^1.8.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.13",
-    "request": "^2.88.2",
-    "web3": "^4.4.0"
+    "moralis": "^2.24.1",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "concurrently": "^6.2.0",

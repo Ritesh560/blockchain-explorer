@@ -5,7 +5,7 @@ const gravatar = require("gravatar")
 const bcrypt = require("bcryptjs")
 const User = require("../../models/User")
 const jwt = require("jsonwebtoken")
-const config = require("config")
+const { JWT_SECRET } = require("../../enviournments")
 
 router.post("/", [check("name", "Name is required").not().isEmpty(), check("email", "Please include a valid email").isEmail(), check("wallet_address", "wallet address is required").not().isEmpty(), check("password", "Please enter a password with 6 or more characters").isLength({ min: 6 })], async (req, res) => {
   const errors = validationResult(req)
@@ -52,7 +52,7 @@ router.post("/", [check("name", "Name is required").not().isEmpty(), check("emai
       },
     }
 
-    jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 360000 }, (err, token) => {
+    jwt.sign(payload, JWT_SECRET, { expiresIn: 360000 }, (err, token) => {
       if (err) {
         throw err
       } else {

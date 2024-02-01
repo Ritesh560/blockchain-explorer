@@ -1,11 +1,14 @@
 let express = require("express")
 const cors = require("cors")
 let connectDB = require("./config/db")
+const setupMoralis = require("./moralisSetup")
 
 let app = express()
 
 //connect Database
 connectDB()
+//setting up moralis
+setupMoralis()
 
 app.use(cors())
 

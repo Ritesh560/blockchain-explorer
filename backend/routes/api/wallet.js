@@ -6,17 +6,17 @@ const router = express.Router()
 //@route GET api/users
 // @desc Test route
 //@access Public
-router.get("/:address", auth, (req, res) => {
+router.get("/:address", auth, async (req, res) => {
   const wallet_address = req.params.address
-  console.log(wallet_address)
 
-  const balance = getWalletBalance(wallet_address)
-  const transections = getWalletTransections(wallet_address)
+  const balance = await getWalletBalance(wallet_address)
+  const transections = await getWalletTransections(wallet_address)
 
-  if (balance.error) res.status(500).send({ error: balance.error, msg: "Error while fetching wallet balance." })
-  if (transections.error) res.status(500).send({ error: transections.error, msg: "Error while fetching wallet transections." })
+  if (balance?.error) res.status(500).send({ error: balance.error, msg: "Error while fetching wallet balance." })
+  if (transections?.error) res.status(500).send({ error: transections.error, msg: "Error while fetching wallet transections." })
 
-  res.status(200).send({ data: { balance, transections } })
+  console.log(balance.data)
+  res.status(200).send({ balance: balance.data, transections: transections.data })
 })
 
 module.exports = router

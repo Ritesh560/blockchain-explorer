@@ -1,10 +1,9 @@
 let mongoose = require("mongoose")
-let config = require("config")
-let db = config.get("mongoURI")
+const { MONGODB_URL } = require("../enviournments")
 
 let connectDB = async () => {
   try {
-    await mongoose.connect(db, {
+    await mongoose.connect(MONGODB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
