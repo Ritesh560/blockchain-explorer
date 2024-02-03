@@ -1,6 +1,6 @@
 const express = require("express")
 const auth = require("../../middleware/auth")
-const { getWalletTransections, getWalletBalance } = require("../../controllers/blockchainController")
+const { getWalletTransections, getWalletBalance } = require("../../controllers/walletController")
 const router = express.Router()
 
 //@route GET api/users
