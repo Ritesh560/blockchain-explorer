@@ -8,18 +8,14 @@ const Home = () => {
   const { userInfo } = useUser();
   const { walletData, fetchingWalletData } = useWallet({ walletAddress: userInfo?.wallet_address });
 
-  console.log('walletData', walletData);
+  const formatDate = (date) => {
+    const dateObj = new Date(date);
 
-  const userData = {
-    name: 'John Doe',
-    walletAddress: '0x1234567890123456789012345678901234567890',
-    email: 'john.doe@example.com',
-    balance: 100,
-    transactions: [
-      { id: 1, type: 'Receive', amount: 50.2, date: '2022-01-01' },
-      { id: 2, type: 'Send', amount: 25.3, date: '2022-01-02' },
-      { id: 3, type: 'Receive', amount: 75.1, date: '2022-01-03' }
-    ]
+    // Format the date
+    const formattedDate = `${dateObj.getDate()}/${dateObj.getMonth() + 1}/${dateObj.getFullYear()}`;
+    // const formattedTime = `${dateObj.getHours()}:${dateObj.getMinutes()}:${dateObj.getSeconds()}`;
+
+    return formattedDate;
   };
 
   return (
@@ -45,22 +41,24 @@ const Home = () => {
           </div>
           <div className={styles.balance}>
             <p className={styles.balanceLabel}>Balance</p>
-            <p className={styles.balanceAmount}>{userData.balance} ETH</p>
+            <p className={styles.balanceAmount}>
+              {parseFloat(walletData?.balance?.native)?.toFixed(3)} ETH
+            </p>
           </div>
         </div>
         <div className={styles.transactions}>
           <h2 className={styles.transactionsHeading}>Recent Transactions</h2>
           <div className={styles.transactionList}>
-            {userData.transactions.map((transaction) => (
+            {walletData?.transections.map((transaction) => (
               <div key={transaction.id} className={styles.transaction}>
-                <p className={styles.transactionType}>{transaction.type}</p>
-                <p className={styles.transactionAmount}>{transaction.amount} ETH</p>
-                <p className={styles.transactionDate}>{transaction.date}</p>
+                <p className={styles.transactionType}>{'Receive'}</p>
+                <p className={styles.transactionAmount}>{transaction?.amount / 10 ** 18} ETH</p>
+                <p className={styles.transactionDate}>{formatDate(transaction?.date)}</p>
               </div>
             ))}
           </div>
         </div>
-        <button className={styles.viewTransactionsButton}>View All Transactions</button>
+        {/* <button className={styles.viewTransactionsButton}>View All Transactions</button> */}
       </div>
     </div>
   );
